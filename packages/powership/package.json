@@ -1,6 +1,6 @@
 {
   "name": "powership",
-  "version": "5.8.0",
+  "version": "5.8.1",
   "author": "antoniopresto <antoniopresto@gmail.com>",
   "type": "module",
   "main": "./out/index.cjs",

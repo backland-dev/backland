@@ -1,6 +1,6 @@
 {
   "name": "@powership/transporter",
-  "version": "5.8.0",
+  "version": "5.8.1",
   "type": "module",
   "main": "./out/index.cjs",
   "module": "./out/index.mjs",
