@@ -1,30 +1,36 @@
-const GLOBALS: powership = Object.create(null);
+const GLOBALS = Object.create(null) as powership;
 
-function defineGlobals() {
-  const defineProperty = (obj: any) => {
-    if (obj && !Object.prototype.hasOwnProperty.call(obj, 'powership')) {
-      Object.defineProperty(obj, 'powership', {
-        configurable: false,
-        enumerable: true,
-        get: () => GLOBALS,
+function define() {
+  try {
+    if (typeof globalThis === 'object' && globalThis) {
+      Object.defineProperty(globalThis, 'powership', {
+        get() {
+          return GLOBALS;
+        },
       });
     }
-  };
-
-  try {
-    if (typeof globalThis !== 'undefined') defineProperty(globalThis);
   } catch (e) {}
 
   try {
-    if (typeof global !== 'undefined') defineProperty(global);
+    if (typeof global === 'object' && global) {
+      Object.defineProperty(global, 'powership', {
+        get() {
+          return GLOBALS;
+        },
+      });
+    }
   } catch (e) {}
 
   try {
-    if (typeof window !== 'undefined') defineProperty(window);
+    Object.defineProperty(window, 'powership', {
+      get() {
+        return GLOBALS;
+      },
+    });
   } catch (e) {}
 }
 
-defineGlobals();
+define();
 
 declare global {
   interface powership {}
@@ -34,12 +40,6 @@ declare global {
   }
 
   const powership: powership;
-
-  namespace NodeJS {
-    interface Global {
-      powership: powership;
-    }
-  }
 }
 
 export {};

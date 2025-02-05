@@ -1,30 +1,3 @@
-const GLOBALS = Object.create(null);
-
-function defineGlobals() {
-  const defineProperty = (obj: any) => {
-    if (obj && !Object.prototype.hasOwnProperty.call(obj, 'powership')) {
-      Object.defineProperty(obj, 'powership', {
-        configurable: false,
-        enumerable: true,
-        get: () => GLOBALS,
-      });
-    }
-  };
-
-  try {
-    if (typeof globalThis !== 'undefined') defineProperty(globalThis);
-  } catch (e) {}
-
-  try {
-    if (typeof global !== 'undefined') defineProperty(global);
-  } catch (e) {}
-
-  try {
-    if (typeof window !== 'undefined') defineProperty(window);
-  } catch (e) {}
-}
-defineGlobals();
-
 export * from '@powership/schema';
 export * from '@powership/utils';
 export * from 'plugin-engine';
